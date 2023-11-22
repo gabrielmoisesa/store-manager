@@ -1,4 +1,4 @@
-const dbUtils = require('./dbUtils');
+const dbUtils = require('./db/dbUtils');
 
 const findAll = async () => dbUtils.selectByQuery(
   `SELECT sp.sale_id, s.date, sp.product_id, sp.quantity

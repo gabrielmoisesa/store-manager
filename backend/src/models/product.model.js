@@ -1,4 +1,4 @@
-const dbUtils = require('./dbUtils');
+const dbUtils = require('./db/dbUtils');
 
 const findAll = () => dbUtils.selectAll('products');
 

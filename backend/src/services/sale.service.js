@@ -1,5 +1,5 @@
 const { saleModel } = require('../models');
-const { handleData } = require('./servicesUtils');
+const { handleData } = require('./svUtils');
 
 const getAll = async () => {
   const data = await saleModel.findAll();
