@@ -5,14 +5,20 @@ const handleGetData = (data, itemName) => {
   return { status: 'SUCCESSFUL', data };
 };
 
-const handleCreate = (id, itemName) => {
-  if (!id) {
+const handleCreate = (data, itemName) => {
+  if (!data.id) {
     return { status: 'CONFLICT', data: { message: `${itemName} already exists` } };
   }
-  return { status: 'CREATED', data: id };
+  return { status: 'CREATED', data };
 };
+
+const handleError = (error) => ({
+  status: 'INVALID_VALUE',
+  data: { message: error.message },
+});
 
 module.exports = {
   handleGetData,
   handleCreate,
+  handleError,
 };

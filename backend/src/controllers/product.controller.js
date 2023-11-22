@@ -15,7 +15,7 @@ const getById = async (req, res) => {
 const post = async (req, res) => {
   const { name } = req.body;
   const { status, data } = await productService.create(name);
-  return res.status(httpMap(status)).json({ id: data, name });
+  return res.status(httpMap(status)).json(data);
 };
 
 module.exports = {

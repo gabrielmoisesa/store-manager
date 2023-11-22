@@ -4,7 +4,10 @@ const findAll = () => dbUtils.selectAll('products');
 
 const findById = (productId) => dbUtils.selectById('products', productId);
 
-const insert = (productName) => dbUtils.insert('products', 'name', productName);
+const insert = async (productName) => {
+  const id = await dbUtils.insert('products', 'name', productName);
+  return { id, name: productName };
+}; 
 
 module.exports = { 
   findAll,
