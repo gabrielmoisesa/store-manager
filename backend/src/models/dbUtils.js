@@ -1,11 +1,7 @@
 const camelize = require('camelize');
 const connection = require('./connection');
 
-const selectAll = async (tableName, customQuery = false) => {
-  if (customQuery) {
-    const [customItems] = await connection.execute(customQuery);
-    return camelize(customItems);
-  }
+const selectAll = async (tableName) => {
   const [items] = await connection.execute(`SELECT * FROM ${tableName}`);
   return camelize(items);
 };
@@ -16,7 +12,13 @@ const selectById = async (tableName, id) => {
   return item;
 };
 
+const selectByQuery = async (query) => {
+  const [items] = await connection.execute(query);
+  return camelize(items);
+};
+
 module.exports = {
   selectAll,
   selectById,
+  selectByQuery,
 };

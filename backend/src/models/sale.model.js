@@ -1,7 +1,6 @@
 const dbUtils = require('./dbUtils');
 
-const findAll = async () => dbUtils.selectAll(
-  'sales_products',
+const findAll = async () => dbUtils.selectByQuery(
   `SELECT sp.sale_id, s.date, sp.product_id, sp.quantity
    FROM StoreManager.sales_products sp
    JOIN StoreManager.sales s ON sp.sale_id = s.id
