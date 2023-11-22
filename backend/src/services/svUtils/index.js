@@ -12,10 +12,13 @@ const handleCreate = (data, itemName) => {
   return { status: 'CREATED', data };
 };
 
-const handleError = (error) => ({
-  status: 'INVALID_VALUE',
-  data: { message: error.message },
-});
+const handleError = (error) => {
+  const { message } = error;
+  if (message.includes('length must be at least')) {
+    return { status: 'INVALID_VALUE', data: { message } };
+  }
+  return { status: 'BAD_REQUEST', data: { message } };
+};
 
 module.exports = {
   handleGetData,
