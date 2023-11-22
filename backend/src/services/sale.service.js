@@ -6,6 +6,12 @@ const getAll = async () => {
   return handleData(data, 'Sales');
 };
 
+const getById = async (saleId) => {
+  const data = await saleModel.findById(saleId);
+  return handleData(data, 'Sale');
+};
+
 module.exports = {
   getAll,
+  getById,
 };
