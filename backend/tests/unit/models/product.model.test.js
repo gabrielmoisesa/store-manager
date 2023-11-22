@@ -14,6 +14,15 @@ describe('Product Model', function () {
     expect(product).to.be.deep.equal(productWithIdOne);
   });
 
+  it('should return all products with success', async function () {
+    sinon.stub(connection, 'execute').resolves([productsFromDB]);
+
+    const products = await productModel.findAll();
+
+    expect(products).to.be.an('array');
+    expect(products).to.be.deep.equal(productsFromDB);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
