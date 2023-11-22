@@ -1,14 +1,14 @@
 const { saleModel } = require('../models');
-const { handleData } = require('./svUtils');
+const { handleGetData } = require('./svUtils');
 
 const getAll = async () => {
   const data = await saleModel.findAll();
-  return handleData(data, 'Sales');
+  return handleGetData(data, 'Sales');
 };
 
 const getById = async (saleId) => {
   const data = await saleModel.findById(saleId);
-  return handleData(data, 'Sale');
+  return handleGetData(data, 'Sale');
 };
 
 module.exports = {

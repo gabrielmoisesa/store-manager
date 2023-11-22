@@ -17,8 +17,15 @@ const selectByQuery = async (query) => {
   return camelize(items);
 };
 
+const insert = async (tableName, columns, values) => {
+  const query = `INSERT INTO ${tableName} (${columns}) VALUES ('${values}');`;
+  const [{ insertId }] = await connection.execute(query);
+  return insertId;
+};
+
 module.exports = {
   selectAll,
   selectById,
   selectByQuery,
+  insert,
 };
