@@ -6,7 +6,7 @@ const productModel = require('../../../src/models/product.model');
 
 describe('Product Model', function () {
   it('should return a product with id 1 with success', async function () {
-    sinon.stub(connection, 'execute').resolves([productsFromDB[0]]);
+    sinon.stub(connection, 'execute').resolves([[productsFromDB[0]]]);
 
     const product = await productModel.findById(1);
 
