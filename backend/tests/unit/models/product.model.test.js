@@ -26,10 +26,12 @@ describe('Product Model', function () {
   it('should create a product with success', async function () {
     sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
 
-    const productId = await productModel.insert(productWithIdOne);
+    const data = await productModel.insert(productWithIdOne);
 
-    expect(productId).to.be.an('number');
-    expect(productId).to.be.deep.equal(1);
+    expect(data).to.be.an('object');
+    expect(data).to.have.property('name');
+    expect(data.id).to.be.an('number');
+    expect(data.id).to.be.deep.equal(1);
   });
 
   afterEach(function () {
