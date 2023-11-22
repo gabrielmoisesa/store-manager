@@ -23,6 +23,15 @@ describe('Product Model', function () {
     expect(products).to.be.deep.equal(productsFromDB);
   });
 
+  it('should create a product with success', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
+
+    const productId = await productModel.insert(productWithIdOne);
+
+    expect(productId).to.be.an('number');
+    expect(productId).to.be.deep.equal(1);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

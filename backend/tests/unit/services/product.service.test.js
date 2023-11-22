@@ -25,6 +25,16 @@ describe('Product Service', function () {
     expect(product.data).to.be.deep.equal(productsFromDB[1]);
   });
 
+  it('should create a product with success', async function () {
+    sinon.stub(productModel, 'insert').resolves(4);
+
+    const response = await productService.create('Product 4');
+
+    expect(response).to.be.an('object');
+    expect(response.status).to.be.equal('CREATED');
+    expect(response.data).to.be.deep.equal(4);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
