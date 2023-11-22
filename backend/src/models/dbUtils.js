@@ -1,7 +1,11 @@
 const camelize = require('camelize');
 const connection = require('./connection');
 
-const selectAll = async (tableName) => {
+const selectAll = async (tableName, customQuery = false) => {
+  if (customQuery) {
+    const [customItems] = await connection.execute(customQuery);
+    return camelize(customItems);
+  }
   const [items] = await connection.execute(`SELECT * FROM ${tableName}`);
   return camelize(items);
 };
