@@ -1,9 +1,6 @@
-const connection = require('./connection');
+const dbUtils = require('./dbUtils');
 
-const findAll = async () => {
-  const [sales] = await connection.execute('SELECT * FROM sales');
-  return sales;
-};
+const findAll = async () => dbUtils.selectAll('sales');
 
 module.exports = {
   findAll,
