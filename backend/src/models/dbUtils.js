@@ -5,6 +5,13 @@ const selectAll = async (tableName) => {
   return items;
 };
 
+const selectById = async (tableName, id) => {
+  const query = `SELECT * FROM ${tableName} WHERE id = ?`;
+  const [[item]] = await connection.execute(query, [id]);
+  return item;
+};
+
 module.exports = {
   selectAll,
+  selectById,
 };
