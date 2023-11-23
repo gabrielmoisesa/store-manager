@@ -18,7 +18,14 @@ const selectByQuery = async (query) => {
 };
 
 const insert = async (tableName, columns, values) => {
-  const query = `INSERT INTO ${tableName} (${columns}) VALUES ('${values}');`;
+  const placeholder = columns.map(() => '?').join(', ');
+  const query = `INSERT INTO ${tableName} (${columns}) VALUES (${placeholder});`;
+  const [{ insertId }] = await connection.execute(query, values);
+  return insertId;
+};
+
+const insertNewSaleDate = async () => {
+  const query = 'INSERT INTO sales (date) VALUES (NOW());';
   const [{ insertId }] = await connection.execute(query);
   return insertId;
 };
@@ -28,4 +35,5 @@ module.exports = {
   selectById,
   selectByQuery,
   insert,
+  insertNewSaleDate,
 };

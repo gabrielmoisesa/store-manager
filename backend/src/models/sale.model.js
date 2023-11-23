@@ -15,7 +15,22 @@ const findById = async (saleId) => dbUtils.selectByQuery(
    ORDER BY sp.sale_id ASC, sp.product_id ASC;`,
 );
 
+const insert = async (saleData) => {
+  const saleId = await dbUtils.insertNewSaleDate();
+
+  await saleData.forEach(async (product) => {
+    dbUtils.insert(
+      'sales_products',
+      ['sale_id', 'product_id', 'quantity'],
+      [saleId, product.productId, product.quantity],
+    );
+  });
+
+  return saleId;
+};
+
 module.exports = {
   findAll,
   findById,
+  insert,
 };
