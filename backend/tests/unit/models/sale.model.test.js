@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const { salesFromDb, salesWithIdOne } = require('../mocks/sale.mock');
+const { salesFromDb, salesWithIdOne, salesRequest } = require('../mocks/sale.mock');
 const connection = require('../../../src/models/db/connection');
 const saleModel = require('../../../src/models/sale.model');
 
@@ -26,7 +26,7 @@ describe('Sale Model', function () {
   it('should create a sale with success', async function () {
     sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
 
-    const id = await saleModel.insert(salesWithIdOne);
+    const id = await saleModel.insert(salesRequest);
 
     expect(id).to.be.an('number');
     expect(id).to.be.deep.equal(1);
