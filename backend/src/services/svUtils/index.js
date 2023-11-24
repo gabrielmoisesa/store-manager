@@ -14,9 +14,11 @@ const handleCreate = (data, itemName) => {
 
 const handleError = (error) => {
   const { message } = error;
+
   if (message.includes('length must be at least')) {
     return { status: 'INVALID_VALUE', data: { message } };
   }
+
   return { status: 'BAD_REQUEST', data: { message } };
 };
 

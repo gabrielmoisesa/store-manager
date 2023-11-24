@@ -1,5 +1,6 @@
-const { saleModel } = require('../models');
-const { handleGetData, handleCreate } = require('./svUtils');
+const { saleModel, productModel } = require('../models');
+const { handleGetData, handleCreate, handleError } = require('./svUtils');
+const schemas = require('./validations/schemas');
 
 const getAll = async () => {
   const data = await saleModel.findAll();
@@ -12,6 +13,12 @@ const getById = async (saleId) => {
 };
 
 const create = async (saleData) => {
+  const { error } = schemas.saleData.validate(...saleData);
+  if (error) return handleError(error);
+
+  const findProduct = await productModel.findById(saleData[0].productId);
+  if (!findProduct) return handleGetData(findProduct, 'Product');
+
   const data = await saleModel.insert(saleData);
   return handleCreate(data, 'Sale');
 };
