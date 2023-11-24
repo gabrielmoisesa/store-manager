@@ -18,8 +18,15 @@ const post = async (req, res) => {
   return res.status(httpMap(status)).json(data);
 };
 
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const { status, data } = await saleService.deleteById(id);
+  return res.status(httpMap(status)).json(data);
+};
+
 module.exports = {
   getAll,
   getById,
   post,
+  deleteById,
 };
