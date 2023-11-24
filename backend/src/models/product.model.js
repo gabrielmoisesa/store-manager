@@ -14,9 +14,15 @@ const update = async (id, productName) => {
   return result;
 };
 
+const deleteById = async (id) => {
+  const result = await dbUtils.deleteById('products', id);
+  return result;
+};
+
 module.exports = { 
   findAll,
   findById, 
   insert,
   update,
+  deleteById,
 };

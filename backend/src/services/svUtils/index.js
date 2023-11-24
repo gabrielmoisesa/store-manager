@@ -29,9 +29,17 @@ const handleUpdate = (result, itemName, data) => {
   return { status: 'SUCCESSFUL', data };
 };
 
+const handleDelete = (result, itemName) => {
+  if (result.affectedRows === 0) {
+    return { status: 'NOT_FOUND', data: { message: `${itemName} not found` } };
+  }
+  return { status: 'NO_CONTENT', data: {} };
+};
+
 module.exports = {
   handleGetData,
   handleCreate,
   handleError,
   handleUpdate,
+  handleDelete,
 };

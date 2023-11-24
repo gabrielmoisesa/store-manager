@@ -36,6 +36,12 @@ const update = async (tableName, column, id, value) => {
   return result;
 };
 
+const deleteById = async (tableName, id) => {
+  const query = `DELETE FROM ${tableName} WHERE id = ?;`;
+  const [result] = await connection.execute(query, [id]);
+  return result;
+};
+
 module.exports = {
   selectAll,
   selectById,
@@ -43,4 +49,5 @@ module.exports = {
   insert,
   insertNewSaleDate,
   update,
+  deleteById,
 };

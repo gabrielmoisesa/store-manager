@@ -1,5 +1,11 @@
 const { productModel } = require('../models');
-const { handleGetData, handleCreate, handleError, handleUpdate } = require('./svUtils');
+const {
+  handleGetData,
+  handleCreate,
+  handleError,
+  handleUpdate,
+  handleDelete,
+} = require('./svUtils');
 const schemas = require('./validations/schemas');
 
 const getAll = async () => {
@@ -29,9 +35,15 @@ const update = async (id, productName) => {
   return handleUpdate(result, 'Product', data);
 };
 
+const deleteById = async (id) => {
+  const result = await productModel.deleteById(id);
+  return handleDelete(result, 'Product');
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  deleteById,
 };
