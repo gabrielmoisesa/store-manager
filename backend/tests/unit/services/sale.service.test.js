@@ -35,6 +35,16 @@ describe('Sale Service', function () {
     expect(response.data.id).to.be.deep.equal(4);
   });
 
+  it('should return an error when trying to create a sale with invalid data', async function () {
+    sinon.stub(saleModel, 'insert').resolves({ id: 4, itemsSold: newSale });
+
+    const response = await saleService.create([{}]);
+
+    expect(response).to.be.an('object');
+    expect(response.status).to.be.equal('BAD_REQUEST');
+    expect(response.data).to.be.deep.equal({ message: '"productId" is required' });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
