@@ -26,10 +26,14 @@ describe('Sale Model', function () {
   it('should create a sale with success', async function () {
     sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
 
-    const id = await saleModel.insert(salesRequest);
+    const data = await saleModel.insert(salesRequest);
 
-    expect(id).to.be.an('number');
-    expect(id).to.be.deep.equal(1);
+    expect(data).to.be.an('object');
+    expect(data).to.have.property('id');
+    expect(data).to.have.property('itemsSold');
+    expect(data.id).to.be.equal(1);
+    expect(data.itemsSold).to.be.an('array');
+    expect(data.itemsSold).to.be.deep.equal(salesRequest);
   });
 
   afterEach(function () {

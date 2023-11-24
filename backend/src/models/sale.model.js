@@ -26,7 +26,7 @@ const insert = async (saleData) => {
     );
   });
 
-  return saleId;
+  return { id: saleId, itemsSold: saleData };
 };
 
 module.exports = {
