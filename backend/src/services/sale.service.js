@@ -16,8 +16,16 @@ const create = async (saleData) => {
   const { error } = schemas.saleData.validate(saleData);
   if (error) return handleError(error);
 
-  const findProduct = await productModel.findById(saleData[0].productId);
-  if (!findProduct) return handleGetData(findProduct, 'Product');
+  const productPromises = saleData.map(async (sale) => {
+    const findProduct = await productModel.findById(sale.productId);
+    return findProduct;
+  });
+
+  const foundProducts = await Promise.all(productPromises);
+
+  if (foundProducts.some((product) => !product)) {
+    return handleGetData(null, 'Product');
+  }
 
   const data = await saleModel.insert(saleData);
   return handleCreate(data, 'Sale');
