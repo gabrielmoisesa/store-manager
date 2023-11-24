@@ -43,8 +43,14 @@ const salesRequest = [
   },
 ];
 
+const newSale = {
+  productId: 3,
+  quantity: 10,
+};
+
 module.exports = {
   salesFromDb,
   salesWithIdOne,
   salesRequest,
+  newSale,
 };
