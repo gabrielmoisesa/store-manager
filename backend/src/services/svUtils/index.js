@@ -15,7 +15,7 @@ const handleCreate = (data, itemName) => {
 const handleError = (error) => {
   const { message } = error;
 
-  if (message.includes('length must be at least')) {
+  if (message.includes('length must be at least') || message.includes('must be greater than')) {
     return { status: 'INVALID_VALUE', data: { message } };
   }
 

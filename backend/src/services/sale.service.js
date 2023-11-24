@@ -13,7 +13,7 @@ const getById = async (saleId) => {
 };
 
 const create = async (saleData) => {
-  const { error } = schemas.saleData.validate(...saleData);
+  const { error } = schemas.saleData.validate(saleData);
   if (error) return handleError(error);
 
   const findProduct = await productModel.findById(saleData[0].productId);
