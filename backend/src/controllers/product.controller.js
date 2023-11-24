@@ -18,8 +18,16 @@ const post = async (req, res) => {
   return res.status(httpMap(status)).json(data);
 };
 
+const put = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  const { status, data } = await productService.update(id, name);
+  return res.status(httpMap(status)).json(data);
+};
+
 module.exports = {
   getAll,
   getById,
   post,
+  put,
 };

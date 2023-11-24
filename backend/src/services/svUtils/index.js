@@ -22,8 +22,16 @@ const handleError = (error) => {
   return { status: 'BAD_REQUEST', data: { message } };
 };
 
+const handleUpdate = (result, itemName, data) => {
+  if (result.affectedRows === 0) {
+    return { status: 'NOT_FOUND', data: { message: `${itemName} not found` } };
+  }
+  return { status: 'SUCCESSFUL', data };
+};
+
 module.exports = {
   handleGetData,
   handleCreate,
   handleError,
+  handleUpdate,
 };

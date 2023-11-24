@@ -30,10 +30,17 @@ const insertNewSaleDate = async () => {
   return insertId;
 };
 
+const update = async (tableName, column, id, value) => {
+  const query = `UPDATE ${tableName} SET ${column} = ? WHERE id = ?;`;
+  const [result] = await connection.execute(query, [value, id]);
+  return result;
+};
+
 module.exports = {
   selectAll,
   selectById,
   selectByQuery,
   insert,
   insertNewSaleDate,
+  update,
 };
