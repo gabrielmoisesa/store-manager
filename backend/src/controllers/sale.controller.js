@@ -12,7 +12,14 @@ const getById = async (req, res) => {
   return res.status(httpMap(status)).json(data);
 };
 
+const post = async (req, res) => {
+  const { body } = req;
+  const { status, data } = await saleService.create(body);
+  return res.status(httpMap(status)).json(data);
+};
+
 module.exports = {
   getAll,
   getById,
+  post,
 };

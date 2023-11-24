@@ -1,5 +1,5 @@
 const { saleModel } = require('../models');
-const { handleGetData } = require('./svUtils');
+const { handleGetData, handleCreate } = require('./svUtils');
 
 const getAll = async () => {
   const data = await saleModel.findAll();
@@ -11,7 +11,13 @@ const getById = async (saleId) => {
   return handleGetData(data, 'Sale');
 };
 
+const create = async (saleData) => {
+  const data = await saleModel.insert(saleData);
+  return handleCreate(data, 'Sale');
+};
+
 module.exports = {
   getAll,
   getById,
+  create,
 };
