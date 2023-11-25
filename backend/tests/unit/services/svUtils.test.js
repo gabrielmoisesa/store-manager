@@ -79,6 +79,15 @@ describe('svUtils', function () {
       const result2 = handleUpdate(result, itemName, data);
       expect(result2).to.be.deep.equal(expected);
     });
+
+    it('should return NOT_FOUND when itemName is Sale Product and result.affectedRows is 0', function () {
+      const result = { affectedRows: 0 };
+      const itemName = 'Sale Product';
+      const data = { id: 1, name: 'product 1' };
+      const expected = { status: 'NOT_FOUND', data: { message: 'Product not found in sale' } };
+      const result2 = handleUpdate(result, itemName, data);
+      expect(result2).to.be.deep.equal(expected);
+    });
   });
 
   describe('handleDelete', function () {
