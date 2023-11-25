@@ -1,5 +1,11 @@
 const { saleModel, productModel } = require('../models');
-const { handleGetData, handleCreate, handleError, handleDelete } = require('./svUtils');
+const {
+  handleGetData,
+  handleCreate,
+  handleError,
+  handleDelete,
+  handleUpdate,
+} = require('./svUtils');
 const schemas = require('./validations/schemas');
 
 const getAll = async () => {
@@ -31,6 +37,22 @@ const create = async (saleData) => {
   return handleCreate(data, 'Sale');
 };
 
+const update = async (saleId, productId, quantity) => {
+  const { error } = schemas.quantity.validate(quantity);
+  if (error) return handleError(error);
+
+  const findSale = await saleModel.findById(saleId);
+  if (!findSale || findSale.length <= 0) return handleGetData(null, 'Sale');
+
+  const result = await saleModel.update(saleId, productId, quantity);
+  const updatedSale = (await saleModel.findById(saleId)).find(
+    (sale) => sale.productId === Number(productId),
+  );
+
+  const data = { ...updatedSale, saleId };
+  return handleUpdate(result, 'Sale Product', data);
+};
+
 const deleteById = async (saleId) => {
   const result = await saleModel.deleteById(saleId);
   return handleDelete(result, 'Sale');
@@ -40,5 +62,6 @@ module.exports = {
   getAll,
   getById,
   create,
+  update,
   deleteById,
 };

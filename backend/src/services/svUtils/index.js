@@ -23,8 +23,12 @@ const handleError = (error) => {
 };
 
 const handleUpdate = (result, itemName, data) => {
+  const message = itemName === 'Sale Product'
+    ? 'Product not found in sale'
+    : `${itemName} not found`;
+
   if (result.affectedRows === 0) {
-    return { status: 'NOT_FOUND', data: { message: `${itemName} not found` } };
+    return { status: 'NOT_FOUND', data: { message } };
   }
   return { status: 'SUCCESSFUL', data };
 };

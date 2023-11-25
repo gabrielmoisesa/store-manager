@@ -36,6 +36,12 @@ const update = async (tableName, column, id, value) => {
   return result;
 };
 
+const updateSoldQuantity = async (saleId, productId, quantity) => {
+  const query = 'UPDATE sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?';
+  const [result] = await connection.execute(query, [quantity, saleId, productId]);
+  return result;
+};
+
 const deleteById = async (tableName, id) => {
   const query = `DELETE FROM ${tableName} WHERE id = ?;`;
   const [result] = await connection.execute(query, [id]);
@@ -49,5 +55,6 @@ module.exports = {
   insert,
   insertNewSaleDate,
   update,
+  updateSoldQuantity,
   deleteById,
 };

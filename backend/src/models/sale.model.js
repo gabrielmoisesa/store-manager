@@ -29,6 +29,11 @@ const insert = async (saleData) => {
   return { id: saleId, itemsSold: [...saleData] };
 };
 
+const update = async (saleId, productId, quantity) => {
+  const result = await dbUtils.updateSoldQuantity(saleId, productId, quantity);
+  return result;
+};
+
 const deleteById = async (saleId) => {
   const result = await dbUtils.deleteById('sales', saleId);
   return result;
@@ -38,5 +43,6 @@ module.exports = {
   findAll,
   findById,
   insert,
+  update,
   deleteById,
 };
