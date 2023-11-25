@@ -49,7 +49,7 @@ const update = async (saleId, productId, quantity) => {
     (sale) => sale.productId === Number(productId),
   );
 
-  const data = { ...updatedSale, saleId };
+  const data = { ...updatedSale, saleId: Number(saleId) };
   return handleUpdate(result, 'Sale Product', data);
 };
 
