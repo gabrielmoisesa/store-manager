@@ -18,6 +18,11 @@ const getById = async (productId) => {
   return handleGetData(data, 'Product');
 };
 
+const getByName = async (productName) => {
+  const data = await productModel.findByName(productName);
+  return { status: 'SUCCESSFUL', data };
+};
+
 const create = async (productName) => {
   const { error } = schemas.productName.validate(productName);
   if (error) return handleError(error);
@@ -43,6 +48,7 @@ const deleteById = async (id) => {
 module.exports = {
   getAll,
   getById,
+  getByName,
   create,
   update,
   deleteById,

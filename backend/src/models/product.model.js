@@ -4,6 +4,12 @@ const findAll = () => dbUtils.selectAll('products');
 
 const findById = (productId) => dbUtils.selectById('products', productId);
 
+const findByName = async (productName) => {
+  const products = await findAll();
+  return products.filter((product) =>
+    product.name.toLowerCase().includes(productName.toLowerCase()));
+};
+
 const insert = async (productName) => {
   const id = await dbUtils.insert('products', ['name'], [productName]);
   return { id, name: productName };
@@ -22,6 +28,7 @@ const deleteById = async (id) => {
 module.exports = { 
   findAll,
   findById, 
+  findByName,
   insert,
   update,
   deleteById,

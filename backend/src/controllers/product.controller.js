@@ -12,6 +12,12 @@ const getById = async (req, res) => {
   return res.status(httpMap(status)).json(data);  
 };
 
+const getByName = async (req, res) => {
+  const { q } = req.query;
+  const { status, data } = await productService.getByName(q);
+  return res.status(httpMap(status)).json(data);
+};
+
 const post = async (req, res) => {
   const { name } = req.body;
   const { status, data } = await productService.create(name);
@@ -34,6 +40,7 @@ const deleteById = async (req, res) => {
 module.exports = {
   getAll,
   getById,
+  getByName,
   post,
   put,
   deleteById,
